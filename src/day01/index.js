@@ -1,19 +1,12 @@
 import run from "aocrunner"
 
-const parseInput = (input) => input.split('\n\n').map(s => s.split('\n').map(x => +x))
+const elves = s => s.split('\n\n').map(s => s.split('\n').reduce((acc, x) => +x+acc,0))
 
-const part1 = (rawInput) => {
-  const elves = parseInput(rawInput)
+const part1 = (input) => Math.max(...elves(input))
 
-  console.log(elves.map(elf => elf.reduce((acc, x) => +x+acc,0)))
-
-  return Math.max(...elves.map(elf => elf.reduce((acc, x) => +x+acc,0)))
-}
-
-const part2 = (rawInput) => {
-  const input = parseInput(rawInput)
-
-  return
+const part2 = (input) => {
+  const sorted = elves(input).sort((a,b) => b-a)
+  return sorted.slice(0,3).reduce((acc, x) => acc + x)
 }
 
 run({
@@ -23,6 +16,4 @@ run({
   part2: {
     solution: part2,
   },
-  trimTestInputs: true,
-  onlyTests: false,
 })
