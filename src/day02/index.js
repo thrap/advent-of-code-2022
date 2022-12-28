@@ -1,17 +1,13 @@
 import run from "aocrunner"
 
 const parseLine = l => l.split(' ').map((c, i) => c.charCodeAt(0) - (i ? 87 : 64))
-const parseInput = rawInput => rawInput.split('\n').map(parseLine)
+const parse = input => input.split('\n').map(parseLine)
 
-const part1 = (rawInput) => {
-  const input = parseInput(rawInput)
+const win = { 1: 3, 2: 1, 3: 2 }
+const lose = { 1: 2, 2: 3, 3: 1 }
 
-  // ROCK:     1
-  // Paper:    2
-  // Scissors: 3
-  const win = { 1: 3, 2: 1, 3: 2 }
-
-  return input.map(([o, p]) => {
+const part1 = (input) => {
+  return parse(input).map(([o, p]) => {
     if (p == o) {
       return 3 + p
     } else if (win[p] == o) {
@@ -22,28 +18,23 @@ const part1 = (rawInput) => {
   }).reduce((acc, x) => acc + x)
 }
 
-const part2 = (rawInput) => {
-  const input = parseInput(rawInput)
-
-  return
+const part2 = (input) => {
+  return parse(input).map(([o, p]) => {
+    if (p == 2) {
+      return 3 + o
+    } else if (p == 1) {
+      return win[o]
+    } else {
+      return 6 + lose[o]
+    }
+  }).reduce((acc, x) => acc + x)
 }
 
-const part1Input = `A Y
-B X
-C Z`
-const part2Input = part1Input
 run({
   part1: {
-    tests: [
-      { input: part1Input, expected: 15 },
-    ],
     solution: part1,
   },
   part2: {
-    tests: [
-      { input: part2Input, expected: 12 },
-    ],
     solution: part2,
   },
-  onlyTests: false,
 })
