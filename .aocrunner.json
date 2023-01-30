@@ -138,13 +138,13 @@
         "solved": true,
         "result": "12520",
         "attempts": [],
-        "time": 0.769545
+        "time": 0.160249
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "EHPZPJGL",
         "attempts": [],
-        "time": null
+        "time": 0.211981
       }
     },
     {
