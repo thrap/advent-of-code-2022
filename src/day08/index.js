@@ -33,27 +33,38 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput)
 
-  return
+  const visible = (x, y) => {
+    const num = input[x][y]
+    const dirs = [[1,0],[-1,0],[0,1],[0,-1]]
+    let asd = 1
+    dirs.forEach(([dx, dy]) => {
+      var count = 0
+      for (var i = 1; input[x+i*dx] && input[x+i*dx][y+i*dy] != undefined; i++) {
+        count++
+        if (input[x+i*dx][y+i*dy] >= num)
+          break
+      }
+      asd *= count
+    })
+    return asd
+  }
+
+  let max = 0
+
+  for (var i = 0; i < input.length; i++) {
+    for (var j = 0; j < input[i].length; j++) {
+      max = Math.max(visible(i, j), max)
+    }
+  }
+
+  return max
 }
 
-const part1Input = `30373
-25512
-65332
-33549
-35390`
-const part2Input = part1Input
 run({
   part1: {
-    tests: [
-      { input: part1Input, expected: '' },
-    ],
     solution: part1,
   },
   part2: {
-    tests: [
-      { input: part2Input, expected: '' },
-    ],
     solution: part2,
   },
-  onlyTests: false,
 })
